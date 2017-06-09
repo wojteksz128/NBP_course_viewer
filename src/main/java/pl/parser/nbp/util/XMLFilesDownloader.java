@@ -52,11 +52,11 @@ public class XMLFilesDownloader {
         }
 
         if (beginDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Begin date is after current date.");
+            throw new IllegalArgumentException("Begin date (" + beginDate + ") is after current date (" + LocalDate.now() + ").");
         }
 
         if (endDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("End date is after current date.");
+            throw new IllegalArgumentException("End date (" + endDate + ") is after current date (" + LocalDate.now() + ").");
         }
 
         Year currYear = Year.from(beginDate);
