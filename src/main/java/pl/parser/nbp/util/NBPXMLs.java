@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 /**
  * Created by Wojciech Szczepaniak on 09.06.2017.
  */
-public class XMLFilesDownloader {
+public class NBPXMLs {
 
     private static final String EXCHANGE_RATE_URL_PART = "http://www.nbp.pl/kursy/xml/";
     private static final String DIR_FILENAME = "dir";
     private static final String DIR_EXTENSION = ".txt";
     private static final String EXCHANGE_RATE_TABLE_EXTENSION = ".xml";
 
-    public static List<URL> downloadXMLsBetweenDates(LocalDate beginDate, LocalDate endDate) throws IOException {
-        return getFileNames(downloadDirFilesWithFileNames(beginDate, endDate), beginDate, endDate).stream()
+    public static List<URL> getXMLDataBetween(LocalDate beginDate, LocalDate endDate) throws IOException {
+        return getFileNamesFromDatesBetween(getDirFilesFromYearsBetween(beginDate, endDate), beginDate, endDate).stream()
                 .parallel()
                 .map(name -> {
                     try {
@@ -33,7 +33,7 @@ public class XMLFilesDownloader {
                 .collect(Collectors.toList());
     }
 
-    private static List<String> getFileNames(List<URL> dirFiles, LocalDate beginDate, LocalDate endDate) throws IOException {
+    private static List<String> getFileNamesFromDatesBetween(List<URL> dirFiles, LocalDate beginDate, LocalDate endDate) throws IOException {
         List<String> fileNames = new ArrayList<>();
 
         for (URL dirFile : dirFiles) {
@@ -48,11 +48,10 @@ public class XMLFilesDownloader {
             }).collect(Collectors.toList()));
         }
 
-        System.err.println(fileNames);
         return fileNames;
     }
 
-    private static List<URL> downloadDirFilesWithFileNames(LocalDate beginDate, LocalDate endDate) throws MalformedURLException {
+    private static List<URL> getDirFilesFromYearsBetween(LocalDate beginDate, LocalDate endDate) throws MalformedURLException {
         List<URL> files = new ArrayList<>();
 
         if (beginDate.isAfter(endDate)) {
