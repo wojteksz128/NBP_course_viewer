@@ -40,4 +40,15 @@ public class DayCurrency {
     public BigDecimal getSellingRate() {
         return sellingRate;
     }
+
+    @Override
+    public String toString() {
+        return "DayCurrency{" +
+                "name='" + name + '\'' +
+                ", converter=" + converter +
+                ", code='" + code + '\'' +
+                ", purchaseRate=" + purchaseRate +
+                ", sellingRate=" + sellingRate +
+                '}';
+    }
 }

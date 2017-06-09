@@ -35,4 +35,14 @@ public class ExchangeRateTable {
     public List<DayCurrency> getDayCurrencyList() {
         return dayCurrencyList;
     }
+
+    @Override
+    public String toString() {
+        return "ExchangeRateTable{" +
+                "tableNo='" + tableNo + '\'' +
+                ", noteDate=" + noteDate +
+                ", publishDate=" + publishDate +
+                ", dayCurrencyList=" + dayCurrencyList +
+                '}';
+    }
 }
