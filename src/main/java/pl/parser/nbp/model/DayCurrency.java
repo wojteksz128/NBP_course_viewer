@@ -12,4 +12,6 @@ public class DayCurrency {
     private String code;
     private BigDecimal purchaseRate;
     private BigDecimal sellingRate;
+
+
 }
