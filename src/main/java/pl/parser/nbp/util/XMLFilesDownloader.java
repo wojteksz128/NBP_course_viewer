@@ -18,11 +18,19 @@ public class XMLFilesDownloader {
     private static final String EXCHANGE_RATE_URL_PART = "http://www.nbp.pl/kursy/xml/";
     private static final String DIR_FILENAME = "dir";
     private static final String DIR_EXTENSION = ".txt";
+    private static final String EXCHANGE_RATE_TABLE_EXTENSION = ".xml";
 
-    public static List<File> downloadXMLsBetweenDates(LocalDate beginDate, LocalDate endDate) throws IOException {
-        List<String> fileNames = getFileNames(downloadDirFilesWithFileNames(beginDate, endDate), beginDate, endDate);
-
-        return null;
+    public static List<URL> downloadXMLsBetweenDates(LocalDate beginDate, LocalDate endDate) throws IOException {
+        return getFileNames(downloadDirFilesWithFileNames(beginDate, endDate), beginDate, endDate).stream()
+                .parallel()
+                .map(name -> {
+                    try {
+                        return new URL(EXCHANGE_RATE_URL_PART + name + EXCHANGE_RATE_TABLE_EXTENSION);
+                    } catch (MalformedURLException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     private static List<String> getFileNames(List<URL> dirFiles, LocalDate beginDate, LocalDate endDate) throws IOException {

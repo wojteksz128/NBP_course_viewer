@@ -15,6 +15,6 @@ import java.time.format.DateTimeFormatter;
 public class MainClass {
 
     public static void main(String[] args) throws IOException {
-        XMLFilesDownloader.downloadXMLsBetweenDates(LocalDate.now(), LocalDate.now());
+        System.out.println(XMLFilesDownloader.downloadXMLsBetweenDates(LocalDate.now(), LocalDate.now()));
     }
 }
