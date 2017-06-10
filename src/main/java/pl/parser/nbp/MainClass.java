@@ -1,5 +1,6 @@
 package pl.parser.nbp;
 
+import pl.parser.nbp.util.NBPXMLParser;
 import pl.parser.nbp.util.NBPXMLs;
 
 import java.io.IOException;
@@ -11,6 +12,6 @@ import java.time.LocalDate;
 public class MainClass {
 
     public static void main(String[] args) throws IOException {
-        System.out.println(NBPXMLs.getXMLDataBetween(LocalDate.now().minusYears(1), LocalDate.now()));
+        System.out.println(NBPXMLParser.getDataFromXMLs(NBPXMLs.getXMLDataBetween(LocalDate.now().minusDays(1), LocalDate.now())));
     }
 }
